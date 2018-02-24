@@ -31,29 +31,64 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteenCentury = inventors.filter(inventor => 
+      inventor.year >= 1500 && inventor.year < 1600
+    );
+    console.log('15th Century Inventors: ', fifteenCentury);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const inventorNames = inventors.map(inventor => 
+      `${inventor.first} ${inventor.last}`
+    );
+    console.log('Inventor Names: ', inventorNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const inventorsByBirth = inventors.sort((invX, invY) => 
+      invX.year - invY.year
+    );
+    console.log('Inventors sorted by birthdate: ', inventorsByBirth);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalYears = inventors.reduce((years, inventor) => 
+      years + (inventor.passed - inventor.year), 0
+    );
+    console.log('Total years lived for inventors: ', totalYears);
 
     // 5. Sort the inventors by years lived
+    const oldestInventors = inventors.sort((invX, invY) => 
+      (invY.passed - invY.year) - (invX.passed - invX.year)
+    );
+    console.log('Oldest inventors: ', oldestInventors);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('.mw-category');
+    // const links = Array.from(category.querySelectorAll('a'));
+    // const de = links.map(link => link.textContent)
+    //             .filter(street => street.includes('de'));
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedNames = people.sort((personX, personY) => {
+      const [xLast, xFirst] = personX.split(', ');
+      const [yLast, yFirst] = personY.split(', ');
+
+      return yLast > xLast ? -1 : 1;
+    });
+    console.log(sortedNames);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const instancesOfElement = data.reduce((map, ele) => {
+      map[ele] = (map[ele] += 1) || 1;
+      return map;
+    }, {});
+    console.log(instancesOfElement);
   </script>
 </body>
 </html>
