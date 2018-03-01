@@ -45,3 +45,9 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mosueout', () => isDrawing = false);
+
+const intersection = (arr1, arr2) => {
+  const set = new Set(arr2);
+
+  return arr1.filter(ele => set.has(ele));
+}
