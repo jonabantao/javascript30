@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+  <h1>KONAMI CODE?</h1>
+  <audio id="lose" src="sounds\the-price-is-right-losing-horn.mp3"></audio>
+  <script>
+    let pressed = [];
+    const secretCode = [
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
+      'a',
+      'b'
+    ];
+    const lose = document.getElementById("lose");
+
+    function konamiCode() {
+      return pressed.every((ele, idx) => ele === secretCode[idx]);
+    }
+
+    window.addEventListener('keyup', e => {
+      pressed.push(e.key);
+
+      if (pressed.length === 10) {
+        console.log(konamiCode());
+        if (konamiCode()) {
+          cornify_add();
+        } else {
+          lose.currentTime = 0;
+          lose.play();
+        }
+
+        pressed = [];
+      }
+    })
+  </script>
+</body>
+
+</html>
