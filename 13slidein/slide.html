@@ -43,6 +43,7 @@
   </div>
 
   <script>
+    // Only run function check once every wait time (20ms atm)
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -57,6 +58,27 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach(slideImage => {
+        // Pixel level at the bottom
+        const slideInAt = window.scrollY + window.innerHeight - (slideImage.height / 2);
+        // offsetTop - difference between top of image to top of window
+        const imageBottom = slideImage.offsetTop + slideImage.height;
+        const isHalfShown = slideInAt > slideImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if (isHalfShown && isNotScrolledPast) {
+          slideImage.classList.add('active');
+        } else {
+          slideImage.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkSlide);
 
   </script>
 
